@@ -24,31 +24,26 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const openAI = async ({ content }) => {
+const openAI = async ({ messages }) => {
 	const completion = await openai.createChatCompletion({
 		model: 'gpt-3.5-turbo',
-		messages: [{ role: 'user', content }],
+		messages,
 	});
-	console.log('코드데이터 비교하기', completion.data.choices[0].message);
+
 	return completion.data.choices[0].message;
 };
-/**  해야 될것
+/**  안될떄마다 업데이트 참고 할 곳
  *  1. https://platform.openai.com/docs/guides/chat/introduction
- *  2. 해당 링크에서 아래처럼 대화형으로 요청해야한다.
- *  3.  {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Who won the world series in 2020?"},
-        {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-        {"role": "user", "content": "Where was it played?"}
  */
 app.post('/', async (req, res) => {
 	try {
-		const { content } = req.body;
-		const answer = await openAI({ content });
+		const { messages } = req.body;
+		console.log('??', messages);
+		const answer = await openAI({ messages });
 
 		return res.status(200).json({ answer });
 	} catch (err) {
-		console.log(err);
-		return res.status(400).json({ message: 'BAD_REQUEST' });
+		return res.status(400).json({ messages: 'BAD_REQUEST' });
 	}
 });
 
