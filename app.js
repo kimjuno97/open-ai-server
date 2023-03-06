@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: 'https://open-ai-git-main-kimjuno97.vercel.app/',
+		origin: 'https://open-ai-git-main-kimjuno97.vercel.app',
 	})
 );
 app.use(morgan('combined'));
