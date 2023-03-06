@@ -8,7 +8,11 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(
+	cors({
+		origin: 'https://open-ai-git-main-kimjuno97.vercel.app/',
+	})
+);
 app.use(morgan('combined'));
 app.use(express.json());
 
@@ -38,7 +42,6 @@ const openAI = async ({ messages }) => {
 app.post('/', async (req, res) => {
 	try {
 		const { messages } = req.body;
-		console.log('??', messages);
 		const answer = await openAI({ messages });
 
 		return res.status(200).json({ answer });
