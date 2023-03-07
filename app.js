@@ -10,10 +10,10 @@ const app = express();
 
 app.use(
 	cors({
-		origin: [
-			'https://open-ai-git-main-kimjuno97.vercel.app',
-			'http://localhost:3000',
-		],
+		origin:
+			process.env.NODE_ENV === 'develop'
+				? 'http://localhost:3000'
+				: 'https://open-ai-git-main-kimjuno97.vercel.app',
 	})
 );
 app.use(morgan('combined'));
