@@ -19,9 +19,11 @@ app.use(
 app.use(morgan('combined'));
 app.use(express.json());
 
-app.get('/ping', (req, res, next) => {
-	res.json({ message: 'pong' });
-});
+if (process.env.NODE_ENV === 'develop') {
+	app.get('/ping', (req, res, next) => {
+		res.json({ message: 'pong' });
+	});
+}
 
 const { Configuration, OpenAIApi } = require('openai');
 
