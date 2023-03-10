@@ -19,39 +19,33 @@ app.use(
 app.use(morgan('combined'));
 app.use(express.json());
 
-if (process.env.NODE_ENV === 'develop') {
-	app.get('/ping', (req, res, next) => {
-		res.json({ message: 'pong' });
-	});
-}
-
-const { Configuration, OpenAIApi } = require('openai');
-
-const configuration = new Configuration({
-	organization: process.env.ORG_ID,
-	apiKey: process.env.API_KEY,
+app.get('/ping', (req, res, next) => {
+	res.json({ message: 'pong' });
 });
-const openai = new OpenAIApi(configuration);
 
-const openAI = async ({ messages }) => {
-	const completion = await openai.createChatCompletion({
-		model: 'gpt-3.5-turbo',
-		messages,
-	});
+// openAI Router Line
+const { chatGPT } = require('./openaiController/chatGptTurbo');
 
-	return completion.data.choices[0].message;
-};
-/**  안될떄마다 업데이트 참고 할 곳
- *  1. https://platform.openai.com/docs/guides/chat/introduction
- */
 app.post('/', async (req, res) => {
 	try {
 		const { messages } = req.body;
-		const answer = await openAI({ messages });
+		const answer = await chatGPT({ messages });
 
 		return res.status(200).json({ answer });
 	} catch (err) {
 		return res.status(400).json({ messages: 'BAD_REQUEST' });
+	}
+});
+
+const { imageAI } = require('./openaiController/imageAI');
+
+app.post('/image', async (req, res) => {
+	try {
+		const answer = await imageAI();
+
+		return res.status(200).json({ answer });
+	} catch (err) {
+		return res.status(400).json({ message: 'BAD_REQUEST' });
 	}
 });
 
