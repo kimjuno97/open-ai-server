@@ -26,7 +26,7 @@ app.get('/ping', (req, res, next) => {
 // openAI Router Line
 const { chatGPT } = require('./openaiController/chatGptTurbo');
 
-app.post('/', async (req, res) => {
+app.post('/chat', async (req, res) => {
 	try {
 		const { messages } = req.body;
 		const answer = await chatGPT({ messages });
@@ -41,7 +41,8 @@ const { imageAI } = require('./openaiController/imageAI');
 
 app.post('/image', async (req, res) => {
 	try {
-		const answer = await imageAI();
+		const { prompt, n, size } = req.body;
+		const answer = await imageAI({ prompt, n, size });
 
 		return res.status(200).json({ answer });
 	} catch (err) {

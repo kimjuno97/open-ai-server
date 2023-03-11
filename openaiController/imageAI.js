@@ -1,13 +1,18 @@
 const { openai } = require('./ConfigOpenAI');
 
-const imageAI = async () => {
+const imageAI = async ({ prompt, n, size }) => {
 	try {
 		const response = await openai.createImage({
-			prompt: 'a white siamese cat',
-			n: 1,
-			size: '1024x1024',
+			prompt,
+			n,
+			size,
 		});
-		return response.data.data[0].url;
+
+		const imageArr = [];
+		for (let i = 0; i < n; i++) {
+			imageArr.push(response.data.data[i].url);
+		}
+		return imageArr;
 	} catch (err) {
 		throw err;
 	}
