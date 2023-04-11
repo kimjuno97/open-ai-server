@@ -13,7 +13,12 @@ app.use(
 		origin:
 			process.env.NODE_ENV === 'develop'
 				? 'http://localhost:3000'
-				: 'https://open-ai-git-main-kimjuno97.vercel.app',
+				: [
+					'https://open-ai-rust-seven.vercel.app',
+					'https://open-ai-kimjuno97.vercel.app',
+					'https://open-ai-git-main-kimjuno97.vercel.app',
+					'https://open-265qsulex-kimjuno97.vercel.app',
+				],
 	})
 );
 app.use(morgan('combined'));
