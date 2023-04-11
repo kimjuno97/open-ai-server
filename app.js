@@ -20,9 +20,7 @@ app.use(morgan('combined'));
 app.use(express.json());
 
 app.get('/ping', (req, res, next) => {
-	res.status(400).json({ message: 'pong' });
-	return  null
-	// res.json({ message: 'pong' });
+	res.json({ message: 'pong' });
 });
 
 // openAI Router Line
