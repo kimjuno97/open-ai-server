@@ -25,7 +25,7 @@ app.use(
 );
 app.use(morgan('combined'));
 app.use(express.json());
-app.use(routes);
+// app.use(routes);
 
 app.get('/ping', (req, res, next) => {
 	res.json({ message: 'pong' });
