@@ -1,5 +1,5 @@
 const express = require('express');
-const { imageAI } = require('../openaiController/imageAI');
+const { imageAI } = require('../src/openaiController/imageAI');
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const { chatGPT } = require('../openaiController/chatGptTurbo');
+const { chatGPT } = require('./openaiController/chatGptTurbo');
 
 const router = express.Router();
 
