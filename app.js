@@ -16,10 +16,9 @@ app.use(
 			process.env.NODE_ENV === 'develop'
 				? 'http://localhost:3000'
 				: [
-						'https://open-ai-rust-seven.vercel.app',
-						'https://open-ai-kimjuno97.vercel.app',
-						'https://open-ai-git-main-kimjuno97.vercel.app',
-						'https://open-265qsulex-kimjuno97.vercel.app',
+						'https://www.chaam.co.kr/',
+						'https://chaam-git-main-kimjuno97.vercel.app',
+						'https://chaam-29ithvht3-kimjuno97.vercel.app',
 				  ],
 	}),
 );
