@@ -10,7 +10,6 @@ const routes = require('./src/routes');
 
 const app = express();
 
-app.use(routes);
 app.use(
 	cors({
 		origin:
@@ -26,7 +25,7 @@ app.use(
 );
 app.use(morgan('combined'));
 app.use(express.json());
-// app.use(routes);
+app.use(routes);
 
 app.get('/ping', (req, res, next) => {
 	res.json({ message: 'pong' });
