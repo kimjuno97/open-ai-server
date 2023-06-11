@@ -16,7 +16,7 @@ app.use(
 			process.env.NODE_ENV === 'develop'
 				? 'http://localhost:3000'
 				: [
-						'https://www.chaam.co.kr/',
+						'https://www.chaam.co.kr',
 						'https://chaam-git-main-kimjuno97.vercel.app',
 						'https://chaam-29ithvht3-kimjuno97.vercel.app',
 				  ],
