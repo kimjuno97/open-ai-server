@@ -41,10 +41,22 @@ const logInInUser = async (req, res) => {
 	}
 };
 
+const saveGift = async (req, res) => {
+	try {
+		const { gift, id } = req.body;
+		const [userInfo] = await authService.saveGift({ gift, id });
+
+		return res.status(201).json({ message: 'success upload', userInfo });
+	} catch (err) {
+		return res.status(err.statusCode || 404).json({ message: '파일을 저장할 수 없습니다..' });
+	}
+};
+
 const authController = {
 	getAllUsers,
 	createUser,
 	logInInUser,
+	saveGift,
 };
 
 module.exports = authController;

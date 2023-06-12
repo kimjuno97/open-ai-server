@@ -24,10 +24,19 @@ const logInInUser = async ({ phone_number }) => {
 	}
 };
 
+const saveGift = async ({ gift, id }) => {
+	try {
+		return await authDao.saveGift({ gift, id });
+	} catch (err) {
+		throw err;
+	}
+};
+
 const authService = {
 	getAllUsers,
 	createUser,
 	logInInUser,
+	saveGift,
 };
 
 module.exports = authService;

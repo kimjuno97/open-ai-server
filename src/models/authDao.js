@@ -38,10 +38,21 @@ const logInInUser = async ({ phone_number }) => {
 	}
 };
 
+const saveGift = async ({ gift, id }) => {
+	try {
+		await database.query(`UPDATE users SET gift=? WHERE id=?;`, [gift, id]);
+		return await database.query(`SELECT * from users WHERE id=?;`, [id]);
+	} catch (err) {
+		console.log(err);
+		throw err;
+	}
+};
+
 const authDao = {
 	getAllUsers,
 	createUser,
 	logInInUser,
+	saveGift,
 };
 
 module.exports = authDao;
