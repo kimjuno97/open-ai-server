@@ -2,7 +2,7 @@ const database = require('./dataSource');
 
 const getTodoList = async ({ user_id }) => {
 	try {
-		return await database.query(`SELECT * FROM todolist WHERE ?`, [user_id]);
+		return await database.query(`SELECT * FROM todolist WHERE user_id = ?`, [user_id]);
 	} catch (err) {
 		const error = new Error('서버 죽었나?..');
 		error.statusCode = 400;
