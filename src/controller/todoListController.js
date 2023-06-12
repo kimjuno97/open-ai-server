@@ -38,10 +38,23 @@ const deleteTodo = async (req, res) => {
 	}
 };
 
+const editTodo = async (req, res) => {
+	try {
+		const { user_id } = req.params;
+		const { id, is_completed, todo } = req.body;
+
+		const todoList = await todoListService.editTodo({ id, user_id, is_completed, todo });
+		return res.status(201).json({ todoList });
+	} catch (err) {
+		return res.status(err.statusCode || 404).json({ message: '잘못된 요청입니다..' });
+	}
+};
+
 const todoListController = {
 	getTodoList,
 	createTodo,
 	deleteTodo,
+	editTodo,
 };
 
 module.exports = todoListController;

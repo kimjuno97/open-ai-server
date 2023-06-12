@@ -4,9 +4,7 @@ const getTodoList = async ({ user_id }) => {
 	try {
 		return await database.query(`SELECT * FROM todolist WHERE user_id = ?`, [user_id]);
 	} catch (err) {
-		const error = new Error('서버 죽었나?..');
-		error.statusCode = 400;
-		throw error;
+		throw err;
 	}
 };
 
@@ -19,9 +17,7 @@ const createTodo = async ({ user_id, todo }) => {
 			[user_id, todo],
 		);
 	} catch (err) {
-		const error = new Error('DB에 안들어감.');
-		error.statusCode = 400;
-		throw error;
+		throw err;
 	}
 };
 
@@ -34,9 +30,21 @@ const deleteTodo = async ({ id }) => {
 			[id],
 		);
 	} catch (err) {
-		const error = new Error('삭제 가능한 정보 없음.');
-		error.statusCode = 400;
-		throw error;
+		throw err;
+	}
+};
+
+const editTodo = async ({ id, todo, is_completed }) => {
+	try {
+		return await database.query(
+			`
+			UPDATE todolist SET todo=?,
+			is_completed=? 
+			WHERE id=?;`,
+			[todo, is_completed, id],
+		);
+	} catch (err) {
+		throw err;
 	}
 };
 
@@ -44,6 +52,7 @@ const todoListDao = {
 	getTodoList,
 	createTodo,
 	deleteTodo,
+	editTodo,
 };
 
 module.exports = todoListDao;
