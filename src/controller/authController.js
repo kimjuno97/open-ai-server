@@ -8,9 +8,9 @@ const createUser = async (req, res) => {
 	try {
 		const { name, phone_number, child_age, region } = req.body;
 
-		if (!!name && !!phone_number && !!child_age && !!region) {
-			throw error();
-		}
+		// if (!!name && !!phone_number && !!child_age && !!region) {
+		// 	throw error();
+		// }
 
 		await authService.createUser({ name, phone_number, child_age, region });
 
