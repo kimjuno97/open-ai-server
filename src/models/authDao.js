@@ -8,9 +8,7 @@ const getAllUsers = async () => {
       `,
 		);
 	} catch (err) {
-		const error = new Error('서버 죽었나?..');
-		error.statusCode = 400;
-		throw error;
+		throw err;
 	}
 };
 
@@ -43,7 +41,6 @@ const saveGift = async ({ gift, id }) => {
 		await database.query(`UPDATE users SET gift=? WHERE id=?;`, [gift, id]);
 		return await database.query(`SELECT * from users WHERE id=?;`, [id]);
 	} catch (err) {
-		console.log(err);
 		throw err;
 	}
 };

@@ -16,8 +16,6 @@ const createTodo = async (req, res) => {
 	try {
 		const { user_id } = req.params;
 		const { todo } = req.body;
-		console.log('잘받았나??');
-		console.log(user_id, req.body);
 
 		const todoList = await todoListService.createTodo({ user_id, todo });
 
