@@ -32,11 +32,20 @@ const saveGift = async ({ gift, id }) => {
 	}
 };
 
+const setDeadLine = async ({ deadline, id }) => {
+	try {
+		return await authDao.setDeadLine({ deadline, id });
+	} catch (err) {
+		throw err;
+	}
+};
+
 const authService = {
 	getAllUsers,
 	createUser,
 	logInInUser,
 	saveGift,
+	setDeadLine,
 };
 
 module.exports = authService;

@@ -52,11 +52,22 @@ const saveGift = async (req, res) => {
 	}
 };
 
+const setDeadLine = async (req, res) => {
+	try {
+		const { deadline, id } = req.body;
+		await authService.setDeadLine({ deadline, id });
+		return res.status(201).json({ message: 'success deadline' });
+	} catch (err) {
+		return res.status(err.statusCode || 404).json({ message: '올바른 유저가 아닙니다.' });
+	}
+};
+
 const authController = {
 	getAllUsers,
 	createUser,
 	logInInUser,
 	saveGift,
+	setDeadLine,
 };
 
 module.exports = authController;

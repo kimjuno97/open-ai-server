@@ -45,11 +45,21 @@ const saveGift = async ({ gift, id }) => {
 	}
 };
 
+const setDeadLine = async ({ deadline, id }) => {
+	try {
+		return await database.query('UPDATE users SET deadline=? WHERE id=?', [deadline, id]);
+	} catch (err) {
+		console.log('err', err);
+		throw err;
+	}
+};
+
 const authDao = {
 	getAllUsers,
 	createUser,
 	logInInUser,
 	saveGift,
+	setDeadLine,
 };
 
 module.exports = authDao;
